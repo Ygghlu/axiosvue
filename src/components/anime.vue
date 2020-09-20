@@ -1,6 +1,7 @@
 <template>
   <div>
     <b-jumbotron>
+      <img src="../assets/logo.png" alt />
       <template v-slot:header>ANIME ARSENAL</template>
       <template v-slot:lead>Search for your favorite anime</template>
       <b-row align-h="center">
