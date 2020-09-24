@@ -1,7 +1,6 @@
 <template>
-  <div>
     <div class="content">
-      <b-jumbotron>
+      <b-jumbotron >
         <img src="../assets/logo.png" alt />
         <template v-slot:header>Muse House</template>
         <template v-slot:lead>Search for your favorite song on Apple music</template>
@@ -94,23 +93,34 @@
           </b-card>
         </b-card-group>
         <b-card-group columns v-else-if="selected === 'entity=allTrack&attribute=allTrackTerm'">
-          <b-card
+           <b-card
             no-body
             class="overflow-hidden"
             style="max-width: 540px"
             :per-page="perPage"
             :current-page="currentPage"
             v-for="data in resultData.slice((currentPage-1)*perPage,(currentPage-1)*perPage+perPage)"
-            :key="data.artistId"
+            :key="data.trackId"
           >
             <b-row no-gutters>
-              <b-col>
-                <b-card-body :title="data.artistName">
+              <b-col md="4">
+                <a :href="data.trackViewUrl" target="_blank">
+                  <b-card-img :src="data.artworkUrl100" class="rounded-0"></b-card-img>
+                </a>
+              </b-col>
+              <b-col md="8">
+                <b-card-body :title="data.trackName">
                   <b-card-text>
-                    <a :href="data.artistLinkUrl" target="_blank">Artist Profile</a>
+                    <p>Artist:{{data.artistName}}</p>
+                    <p>Album : {{data.collectionName}}</p>
                   </b-card-text>
                 </b-card-body>
               </b-col>
+            </b-row>
+            <b-row align-h="center">
+              <audio controls>
+                <source :src="data.previewUrl" />
+              </audio>
             </b-row>
           </b-card>
         </b-card-group>
@@ -149,7 +159,6 @@
         </b-card-group>
       </b-container>
     </div>
-  </div>
 </template>
 
 <script>
@@ -222,7 +231,7 @@ export default {
   position: relative;
   width: 100%;
   text-align: center;
-  display: flex;
+  display:flex;
   align-items: center;
   justify-content: center;
 }
